@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InnfProg 2024 - deleksamen 1</title>
+    <link href="exam1.css" rel="stylesheet" media="all">
+</head>
+<body>
+    <main>
+        <h2 id="heading"></h2>
+        <p id="intro"></p>
+        <ul>
+            <li id="q1"></li>
+            <li id="q2"></li>
+            <li id="q3"></li>
+        </ul>
+        <p id="delivery"></p>
+    </main>
+
+    <script>
+        const code = {
+            hx: "Efmfltbnfo 1",
+            ix: "A sfuuf gfjmfof ph lpnnfoufsf lpefo wbs cbsf gåstuf efm bw pqqhbwfo. Ev tlbm phta ub gps efh ufltufo ev tlsfw j bscfjetlsbw 1, ph tlsjwf fu ozuu sfgmfltkpotopubu oa oas ev ibs hkfoopngåsu lvstfu. J efuuf sfgmfltkpotopubufu, twbs qa gåmhfoef tqåstnam:",
+            qx: ["Botfs ev qsphsbnnfsjoh tpn ozuujh?", "Tfs ev gps efh bu ev wjm csvlf qsphsbnnfsjoh j ejuu wjefsf tuvejfmåq?", "Iwps npujwfsu fs ev gps a vugpstlf qsphsbnnfsjoh wjefsf fuufs lvstfu?"],
+            dx: "Mbh fo QEG bw eplvnfoufu, ph mfhh wfe caef efuuf eplvnfoufu tbnu cftwbsfmtfo gps bscfjetlsbw 1 j cftwbsfmtfo ujm efmfltbnfo 1." //1. På denne linjen (linje 26) er det en skrivefeil, det skal være ":" i stedet for "=". Fant ut av det da jeg åpnet filen i nettleseren og fikk en feilmelding i konsollen.  
+        }
+
+        function decode(input) {
+            const alphabet = 'abcdefghijklmnopqrstuvwxyzæøå'
+            const alphabetUpper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ' //2. manglet en ' her, på linje 31, fant utav det da seg så at det var rødt, og rødt ofte indikerer feil. 
+
+            const getPreviousChar = (char, alphabet) => {
+                const index = alphabet.indexOf(char);
+                return index === -1 ? char : alphabet[(index - 1 + alphabet.length) % alphabet.length];
+            };
+
+            return input.split('').map(char => {
+                if (alphabet.includes(char)) { //4. Var en skrivefeil her på linje 39, da "alphabet" var skrevet som "alphabetT" med stor/ekstra T og er ikke rett, så det i konsollen.
+                    return getPreviousChar(char, alphabet)
+                } else if (alphabetUpper.includes(char)) {
+                    return getPreviousChar(char, alphabetUpper)
+                }
+                return char
+            }).join('')
+        }
+
+        //PRINT DECODED MATERIAL
+        document.getElementById("heading").innerHTML = decode(code.hx)
+        document.getElementById("intro").innerHTML = decode(code.ix)
+        document.getElementById("q1").innerHTML = decode(code.qx[0]) //6. Nok en skrive feil (linje 51), da innerHTML var skrevet som innerHtml, fant ut av det ved å markere fra linje 21 til 55, og høyreklikket så kom det opp et lite vindu og der klikket jeg på "Copilot" også "fix" også "View in chat" og da så jeg at det var en skrivefeil der. 
+        document.getElementById("q2").innerHTML = decode(code.qx[1]) //5. Skrivefeil her og på linje 52, da getElementById var skrevet som getElementByID, fant det ut i nettleserens konsoll.
+        document.getElementById("q3").innerHTML = decode(code.qx[2]) //3. Manglet en "]" her, på linje 52, fant utav det da jeg så at det var rødt, og rødt ofte indikerer feil.
+        document.getElementById("delivery").innerHTML = decode(code.dx)
+    </script>
+</body>
+</html>
