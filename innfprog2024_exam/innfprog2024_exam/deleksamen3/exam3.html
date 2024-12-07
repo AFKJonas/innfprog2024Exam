@@ -42,6 +42,43 @@
 
         /* --- YOUR FUNCTIONALITY AND CODE GOES HERE --- */
         
+        //minstekrav for oppgave 2. Fargene blir laget i en array på linje 46.
+       let randomHex = []
+        //lager en funksjon som ramdomiserer farger
+        function generateHex(){
+            if (randomHex.length >= 10){
+                return
+            }
+            //Lager en array som inneholder tall 0-9 og bokstavene A-F
+            const arrayForRandomHex = [
+                "1","2","3","4","5","6","7","8","9", "A", "B", "C", "D", "E", "F"
+            ]
+            let hexColor = "#"
+            for (let i = 0; i < 6; i++){
+                hexColor += arrayForRandomHex[Math.floor(Math.random() * arrayForRandomHex.length)]
+            }
+            return hexColor
+        }
+        function saveHex(){ 
+            const newHex = generateHex()
+            if(newHex){
+                randomHex.push(newHex)
+                console.log(randomHex)
+            }
+        }
+
+
+        //Skriver ut fargene i arrayen
+        document.getElementById("addColor").addEventListener("click", saveHex)
+
+        
+        
+
+        
+
+        
+
+
 
         //requestAnimationFrame
         const requestAnimationFrame = window.requestAnimationFrame || window.msRequestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame
