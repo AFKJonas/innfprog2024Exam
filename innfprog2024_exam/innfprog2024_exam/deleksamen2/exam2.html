@@ -39,14 +39,14 @@
             <ul id="todolist">
                 <!-- De to listeelementene skal byttes ut med utskrift av data fra programkoden i <script> -->
 
-                <li>
+                <!-- <li>
                     <span class="tast-text">Les eksamensteksten</span>
                     <span class="task-status task-status-done">Done</span>
                 </li>
                 <li>
                     <span class="tast-text">Løs oppgavene i InnfProg-eksamen</span>
                     <span class="task-status task-status-todo">To do</span>
-                </li> 
+                </li>  -->
 
             </ul>
         </section>
@@ -65,10 +65,12 @@
 
         let contactlist = ""
 
+        //Oppgave 2. minstekrav: Åpner en ny e-post når du klikker på en e-postadressene:
+
         contacts.map((contact, index) => {
             contactlist += `<article>
                 <p><strong>${contact.lastname}, ${contact.firstname}</strong><br />
-                    Kontor: ${contact.office} | E-post: ${contact.mail}</p>
+                    Kontor: ${contact.office} | E-post: <a href="mailto:${contact.mail}"> ${contact.mail}</a></p> 
             </article>`
         })
 
@@ -96,12 +98,27 @@
             {text: "Lag funksjonalitet for å registrere nye oppgaver", status: "To do"},
             {text: "Lag funksjonalitet for å sette en eksisterende oppgave til utført ved å endre status", status: "To do"}
         ]
-        //SKRIVER UT TODOS:
 
+
+        //Oppgave 1. minstekrav: Bytt ut de hardkodede oppgavene (linje 42-49 i exam2.html) med en dynamisk utskrift av oppgavene som ligger lagret i todos:
+
+        //Lager først en tom variabel som får verdiene ifra todos. 
+        let oppgaver = ""
+        //.map() funksjonen går gjennom alle objektene i todos.    
+        todos.map((item, index) => {
+        //For hvert objekt lagret i todos, legger den til et nytt <li> element "${item.text}" i "todolist" slik at det danner seg en liste. 
+        //Inni <li> elementet er det en if/else/ternery operator som skjekker om ${item.status} er satt til "Done" hvis den er "task-status-done", og hvis ikke, er den satt til "To do" ved at det står "task-status-todo".
+            oppgaver += `<li>
+                <span class="task-text">${item.text}</span>
+                <span class="task-status ${item.status === "Done" ? "task-status-done": "task-status-todo"}">${item.status}</span>
+            </li>`
+        })
+        //Linjen under gjør at oppgavene blir skrevet ut i HTML dokumentet. 
+        document.getElementById("todolist").innerHTML = oppgaver
         console.log(todos);  //Skriver det ut i konsollen
-        
-    
-        
+
+
+
         
         //CLOCK
         
