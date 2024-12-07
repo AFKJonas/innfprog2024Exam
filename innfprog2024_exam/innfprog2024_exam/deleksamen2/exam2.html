@@ -66,7 +66,7 @@
         let contactlist = ""
 
         //Oppgave 2. minstekrav: Åpner en ny e-post når du klikker på en e-postadressene:
-
+        //Lagt til en <a> tag rundt e-postadressen (linje-73) slik at e-postene blir klikkbare.
         contacts.map((contact, index) => {
             contactlist += `<article>
                 <p><strong>${contact.lastname}, ${contact.firstname}</strong><br />
