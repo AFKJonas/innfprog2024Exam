@@ -66,7 +66,7 @@
         let contactlist = ""
 
         //Oppgave 2. minstekrav: Åpner en ny e-post når du klikker på en e-postadressene:
-        //Lagt til en <a> tag rundt e-postadressen (linje-73) slik at e-postene blir klikkbare.
+        //Lagt til en <a> tag rundt e-postadressen (linje-73) slik at e-postene blir klikkbare
         contacts.map((contact, index) => {
             contactlist += `<article>
                 <p><strong>${contact.lastname}, ${contact.firstname}</strong><br />
@@ -102,20 +102,46 @@
 
         //Oppgave 1. minstekrav: Bytt ut de hardkodede oppgavene (linje 42-49 i exam2.html) med en dynamisk utskrift av oppgavene som ligger lagret i todos:
 
-        //Lager først en tom variabel som får verdiene ifra todos. 
+        //Lager først en tom variabel som får verdiene ifra todos 
         let oppgaver = ""
-        //.map() funksjonen går gjennom alle objektene i todos.    
+        //.map() funksjonen går gjennom alle objektene i todos    
         todos.map((item, index) => {
-        //For hvert objekt lagret i todos, legger den til et nytt <li> element "${item.text}" i "todolist" slik at det danner seg en liste. 
-        //Inni <li> elementet er det en if/else/ternery operator som skjekker om ${item.status} er satt til "Done" hvis den er "task-status-done", og hvis ikke, er den satt til "To do" ved at det står "task-status-todo".
+        //For hvert objekt lagret i todos, legger den til et nytt <li> element "${item.text}" i "todolist" slik at det danner seg en liste 
+        //Inni <li> elementet er det en if/else/ternery operator som skjekker om ${item.status} er satt til "Done" hvis den er "task-status-done", og hvis ikke, er den satt til "To do" ved at det står "task-status-todo"
             oppgaver += `<li>
                 <span class="task-text">${item.text}</span>
                 <span class="task-status ${item.status === "Done" ? "task-status-done": "task-status-todo"}">${item.status}</span>
             </li>`
         })
-        //Linjen under gjør at oppgavene blir skrevet ut i HTML dokumentet. 
+        //Linjen under gjør at oppgavene blir skrevet ut i HTML dokumentet
         document.getElementById("todolist").innerHTML = oppgaver
         console.log(todos);  //Skriver det ut i konsollen
+        
+        //Arbeidskrav D, oppgave 1:
+        const btn = document.getElementById("savetask")
+        //Lager en eventlistener som lytter etter klikk på knappen "Lagre" og kjører funksjonen "taskSaved" når den blir klikket på
+        btn.addEventListener("click", taskSaved)
+        //Lager en funksjon som lagrer oppgaven som blir skrevet inn i inputfeltet "task" i todos arrayen:
+        function taskSaved(){
+            //Lager en variabel som henter verdien fra inputfeltet "task"
+            const task = document.getElementById("task").value
+            //Legger til en ny oppgave i todos arrayen, med statusen "To do"
+            todos.push({text: task, status: "To do"})
+            //Oppdaterer oppgavelisten i HTML:
+            let oppgaver = ""
+            //Går igjennom alle objektene i todos arrayen og legger de til listen i HTML
+            todos.map((item, index) => {
+                oppgaver += `<li>
+                    <span class="task-text">${item.text}</span>
+                    <span class="task-status ${item.status === "Done" ? "task-status-done": "task-status-todo"}">${item.status}</span>
+                </li>`
+            })
+            document.getElementById("todolist").innerHTML = oppgaver
+        }
+        
+        
+
+
 
 
 
