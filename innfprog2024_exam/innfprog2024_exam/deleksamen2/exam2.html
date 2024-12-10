@@ -12,7 +12,7 @@
             <h2>Kontakter</h2>
             <div id="contactlist"></div>
         </section>
-        <aside id="clock">13:37</aside>
+        <aside id="clock"></aside>
         <section id="books">
             <h2>Regnskap</h2>
             <p>Innkommende egenkapital: Kr. <span id="incomingequity"></span></p>
@@ -134,6 +134,7 @@
             </li>`
             document.getElementById("todolist").innerHTML = oppgaver
         }
+        
 
 
         
@@ -144,7 +145,32 @@
 
         
         //CLOCK
-        
+        //Kopierte funksjonen (linje 150 - 164)direkte fra: https://www.w3schools.com/js/tryit.asp?filename=tryjs_timing_clock
+        //Endret KUN hvor klokken skal skrives ut, fra "txt" til "clock" på linje 157, og la til "startTime()" slik at funksjonen kjører
+        //Deklarerer funksjonen
+        function startTime() {
+            //Deklarerer variabelen "today" som henter dagens dato
+            const today = new Date();
+            //Deklarerer variablene "h , m , s" som henter både timer, minutter og sekunder fra "today"
+            let h = today.getHours();
+            let m = today.getMinutes();
+            let s = today.getSeconds();
+            //Legger til en null foran tallene hvis de er mindre enn 10
+            m = checkTime(m);
+            s = checkTime(s);
+            //Skriver ut klokkeslettet i HTML dokumentet ved at den henter iden "clock" og skriver ut "h:m:s" / timer, minutter og sekunder
+            document.getElementById('clock').innerHTML =  h + ":" + m + ":" + s;
+            //Kjører funksjonen hvert 1 000 millisekund eller hvert sekund
+            setTimeout(startTime, 1000);
+            }
+            //Denne funksjonen legger til en null foran tallene hvis de er mindre enn 10, slik at de blir skrevet ut som "01" istedenfor "1"
+            function checkTime(i) {
+            if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10 (<- kopiert direkte notat fra w3schools)
+            //Returnerer verdien i (med null forran hvis verdien er mindre enn 10) tilbake til funksjonen
+            return i; 
+            }
+            //Starter funksjonen
+        startTime();
     </script>
 </body>
 </html>
