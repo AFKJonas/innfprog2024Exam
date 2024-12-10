@@ -73,17 +73,66 @@
 
         //Skriver ut fargene i arrayen
         document.getElementById("addColor").addEventListener("click", saveHex)
+         
 
-
+        //Arbeidskrav D, oppgave 1:
         //requestAnimationFrame
         const requestAnimationFrame = window.requestAnimationFrame || window.msRequestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame
+        //funksjon som tegner fargene i canvaset 
         function renderCanvas() {
+            //Tømmer canvaset
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            //Lager en forEach løkke som går igjennom arrayen randomHex og skriver ut fargene i canvaset
+            randomHex.forEach((item, index) => {
+                //klassefiserer fillStyle som fargene i arrayen
+                ctx.fillStyle = item
+                //Tar fargene ifra fillStyle og legger de i fargefirkaneter i canvaset  
+                ctx.fillRect(index * 100, 0, 100, 100)
+              
+            //Rektangel inni fargeboksen oppe til venstre
+            ctx.beginPath()
+            ctx.fillStyle = "white"
+            ctx.fill()
+            ctx.fillRect(0, 0, 70, 15)
+            ctx.closePath()
+
+            //Tekst inni rektangelet
+            ctx.beginPath()
+            ctx.font = "10px Arial"
+            ctx.fillStyle = "black"
+            ctx.fillText("#ffffff", 5, 10) 
+            ctx.closePath()
+
+            //Hvit firkant nede i høyre hjørne inni fargeboksen
+            ctx.beginPath()
+            ctx.fillStyle = "white"
+            ctx.fill()
+            ctx.fillRect(0, 0, 70, 15)
+            ctx.closePath()
+
+            //Tekst inni hvit firkant
+            ctx.beginPath()
+            ctx.font = "10px Arial"
+            ctx.fillStyle = "black"
+            ctx.fillText()
+            ctx.closePath()
             
-            requestAnimationFrame(renderCanvas)
+            });
+
+            
+
+
+
+            requestAnimationFrame(renderCanvas);
         }
 
         //Initial running of drawing canvas
         renderCanvas()
+
+
+        
+
     </script>
 </body>
 </html>
+
