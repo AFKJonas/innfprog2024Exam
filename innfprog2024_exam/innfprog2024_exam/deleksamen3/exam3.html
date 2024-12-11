@@ -89,34 +89,49 @@
                 //Tar fargene ifra fillStyle og legger de i fargefirkaneter i canvaset  
                 ctx.fillRect(index * 100, 0, 100, 100)
               
-            //Rektangel inni fargeboksen oppe til venstre
+            //Hvit rektangel inni fargeboksen oppe til venstre
+            //begynner å tegne
             ctx.beginPath()
+            //Klassefiser hvilken farge rektangelet skal ha
             ctx.fillStyle = "white"
-            ctx.fill()
-            ctx.fillRect(0, 0, 70, 15)
+            //Fyller rektangelet med den angitte fargen og tegner rektangelet i den valgte posisjonen 
+            ctx.fillRect(index *100, 0, 70, 15)
+            //Ferdiggjør tegningen
             ctx.closePath()
 
             //Tekst inni rektangelet
+            //Begynner å tegne
             ctx.beginPath()
-            ctx.font = "10px Arial"
+            //Velger tekst-type og størrelse
+            ctx.font = "12px Arial"
+            //Velger farge på teksten
             ctx.fillStyle = "black"
-            ctx.fillText("#ffffff", 5, 10) 
+            //Skriver ut teksten(og fargen på teksten) i rektangelet på den valgte posisjonen
+            ctx.fillText(item.toLowerCase() , index * 100 + 5, 10) 
+            //Ferdiggjør tegningen
             ctx.closePath()
 
             //Hvit firkant nede i høyre hjørne inni fargeboksen
+            //Begynner å tegne
             ctx.beginPath()
+            //Klassefiser hvilken farge rektangelet skal ha
             ctx.fillStyle = "white"
-            ctx.fill()
-            ctx.fillRect(0, 0, 70, 15)
+            //Fyller rektangelet med den angitte fargen og tegner rektangelet i den valgte posisjonen
+            ctx.fillRect(index * 100 + 80, 80, 20, 20)
+            //Ferdiggjør tegningen
             ctx.closePath()
 
             //Tekst inni hvit firkant
+            //Begynner å tegne
             ctx.beginPath()
-            ctx.font = "10px Arial"
+            //Velger tekst-type og størrelse
+            ctx.font = "12px Arial "
+            //Velger farge på teksten
             ctx.fillStyle = "black"
-            ctx.fillText()
+            //Skriver ut teksten(og fargen på teksten) i rektangelet på den valgte posisjonen
+            ctx.fillText(index + 1, index * 100 + 85, 95)
+            //Ferdiggjør tegningen
             ctx.closePath()
-            
             });
 
             
@@ -128,6 +143,21 @@
 
         //Initial running of drawing canvas
         renderCanvas()
+
+        //Arbeidskrav D, oppgave 2:
+        //funksjon for å tømme canvaset når "Tilbakestill fargene" knappen blir trykket på
+        document.getElementById("emptyArray").addEventListener("click", tomFargeArray)
+        //funksjon som tømmer arrayen og canvaset
+        function tomFargeArray(){
+            //Tømmer arrayen
+            randomHex = []
+            //Tømmer canvaset
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+        }
+        console.log(generateHex)
+
+
+
 
 
         
