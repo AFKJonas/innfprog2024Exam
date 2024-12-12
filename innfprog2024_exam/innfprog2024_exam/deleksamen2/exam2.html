@@ -142,30 +142,46 @@
         })
         //Linjen under gjør at oppgaver blir skrevet ut i HTML dokumentet
         document.getElementById("todolist").innerHTML = oppgaver
-        console.log(todos);  //Skriver det ut i konsollen
+        console.log(todos)  //Skriver det ut i konsollen
         
-        //Arbeidskrav D, oppgave 1:
+        //Arbeidskrav D, oppgave 1 OG Arbeidskrav C, oppgave 3 og 4:
+        
         const btn = document.getElementById("savetask")
         //Lager en eventlistener som lytter etter klikk på knappen "Lagre" og kjører funksjonen "leggeTilArray()" når den blir klikket på
         btn.addEventListener("click", leggeTilArray)
-        //Lager en funksjon som lagrer oppgaven som blir skrevet inn i inputfeltet "task" i todos arrayen:
+        //Lager en funksjon som lagrer oppgaven(e) som blir skrevet inn i inputfeltet "task" i todos arrayen:
         function leggeTilArray(){
-            //Laget en variabel som henter verdien som blir skrevet inn i inputfeltet "task"
-            const skriveFelt = document.getElementById("task").value
-            //Legger til oppgaven som blir skryevet inn i inputfeltet "task" inn i todos arrayen
-            todos.push({text: skriveFelt, status: "To do"});
-            //Skriver ut oppgaven som blir lagt til i todos arrayen i HTML dokumentet
-            oppgaver += `<li>
-                <span class="task-text">${skriveFelt}</span>
-                <span class="task-status task-status-todo">To do</span>
-            </li>`
-            document.getElementById("todolist").innerHTML = oppgaver
-        }
 
-        //Arbeidskrav C, oppgave 3:
-        //Lager en funksjon som varsler brukeren, dersom det er ingenting i inputfeltet
-         
-        
+
+            //Kopiert ifra ChatGPT med noen endringer (fra linje 156 - 180):
+            //Deklarerer variabelen "oppgaveTekstFelt" som henter verdien fra inputfeltet "task" og lagrer det.
+            const oppgaveTekstFelt = document.getElementById("task").value
+            //Lager en if-test som varsler brukeren hvis inputfeltet er tomt, og stopper funksjonen i å kjøre, men hvis det er skrevet noe i inputfeltet, kjører den.
+            if(oppgaveTekstFelt ===""){
+                //Her er varselet som blir vist hvis inputfeltet er tomt:
+                alert("Du må skrive inn en oppgave for å lagre en oppgave!")
+                //og her stopper funksjonen i å kjøre videre:
+                return
+            }
+            //pusher inn det som er skrevet i inputfeltet/"oppgaveTekstFelt" inn i todos arrayen, og setter statusen til "To do"
+            todos.push({text: oppgaveTekstFelt, status: "To do"})
+            //legger til en tom variabel som lagrer oppgavene
+            let oppgaver = ""
+            //.map går gjennom alle objektene/item i todos arrayen og legger de inn i variabelen "oppgaver"
+            todos.map((item, index) => {
+                oppgaver += `<li>
+                    <span class="task-text">${item.text}</span>
+                    <span class="task-status ${item.status === "Done" ? "task-status-done": "task-status-todo"}">${item.status}</span>
+                </li>`
+            })
+            //Skriver ut oppgavene i HTML todolist
+            document.getElementById("todolist").innerHTML = oppgaver
+            //Her blir "oppgaveTekstFelt" / inputfeltet tømt etter at oppgaven er lagret:
+            document.getElementById("task").value = ""
+  
+        }
+        //Kopiert ifra ChatGPT med noen endringer, i linjene over (fra linje 156 - 180)
+
         
         //Arbeidskrav D, oppgave 2:
         //CLOCK

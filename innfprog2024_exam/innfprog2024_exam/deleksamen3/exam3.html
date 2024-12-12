@@ -134,10 +134,6 @@
             ctx.closePath()
             });
 
-            
-
-
-
             requestAnimationFrame(renderCanvas);
         }
 
@@ -154,10 +150,55 @@
             //Tømmer canvaset
             ctx.clearRect(0, 0, canvas.width, canvas.height)
         }
-        console.log(generateHex)
 
+        //Arbeidskrav C, oppgave 1:
+        //Lager en funksjon som sørger for at 10 nye farger blir laget hver gang når "Generer 10 nye farger"/ "generateAll" knappen blir trykket på
+        document.getElementById("generateAll").addEventListener("click", genererTiNyeFarger)
+        //Funksjon som genererer 10 nye farger
+        function genererTiNyeFarger(){
+            //Variabel som tømmer arrayen hver gang knappen "Generer 10 nye farger"/ "generateAll" blir trykket på
+            randomHex = []
+            //Lager deretter en loop som lager 10 nye farger hver gang kanppen blir trykket på
+            for (let i = 0; i < 10; i++){
+                //Kaller så funksjonen saveHex for å lagre fargene i arrayen
+                saveHex()
+            }
 
+        }
 
+        //Arbeidskrav C, oppgave 2:
+        //Lager en funksjon som aktiverer/deaktiverer knappen "Legg til en farge" når det er 10 farger i arrayen randomHex:
+        function maxTiFarger(){
+            //if test som sjekker om hvis randomHex arrayen har lagret 10 eller flere farger, så blir knappen "Legg till en farge" deaktivert, hvis ikke er den aktivert
+         if (randomHex.length >= 10){
+            //Deaktiverer knappen
+                document.getElementById("addColor").disabled = true
+            } else {
+                //Aktiverer knappen
+                document.getElementById("addColor").disabled = false
+            }   
+        //Copilot foreslo (de linjene under fra 179 - 190) å legge til en arrow funksjon som gjør at "Generer 10 nye farger" knappen blir deaktivert når det er 10 farger i arrayen, og aktivert når det er mindre enn 10 farger i arrayen
+        }
+        //Kaller funksjonen maxTiFarger når addColor knappen blir trykket på
+        document.getElementById("addColor").addEventListener("click", () => {
+            maxTiFarger();
+        });
+        //Kaller funksjonen genererTiNyeFarger og maxTiFarger  når emptyArray knappen blir trykket på
+        document.getElementById("generateAll").addEventListener("click", () => {
+            genererTiNyeFarger();
+            maxTiFarger();
+        });
+        //Kaller funksjonen tomFargeArray og maxTiFarger når emptyArray knappen blir trykket på
+        document.getElementById("emptyArray").addEventListener("click", () => {
+            tomFargeArray();
+            maxTiFarger();
+        });
+        //Kjører funksjonen
+        maxTiFarger();
+
+      
+
+           
 
 
         
