@@ -65,6 +65,12 @@
 
         let contactlist = ""
 
+        //Arbeidskrav C, oppgave 1:
+        //Linje 71 er kopiert direkte ifra ChatGPT:
+        //Linjen under sorterer kontaktene etter etternavn FØR de blir skrevet ut i HTML:
+        contacts.sort((a, b) => a.lastname.localeCompare(b.lastname))
+        //Linjen over er kopiert direkte ifra ChatGPT
+
         //Oppgave 2. minstekrav: Åpner en ny e-post når du klikker på en e-postadressene:
         //Lagt til en <a> tag rundt e-postadressen (linje-73) slik at e-postene blir klikkbare
         contacts.map((contact, index) => {
@@ -90,6 +96,27 @@
         document.getElementById("incomingequity").innerHTML = equity
         let balance = 0;    //Startbalanse for utregning av utgifter og inntekter i november
 
+        //Arbeidskrav C, oppgave 2:
+        //Lager en funksjon som skriver ut bokføringene i books, i listen med bokføringer i HTML dokumentet, egentlig det samme som oppgave 1 minstekrav
+        function skriverUtBooks(){
+            //Lager en tom variabel for at bokføringene blir lagret i denne
+            let booklines = ""
+            //Lager en .map() funksjon som går igjennom objektene i books og legger de inn i variabelen "booklines"
+            books.map((book, index) => {
+                //Bruker template literals for skrive ut bokføringene direkte inn i HTML dokumentet
+                booklines += `<div class="bookline">
+                    <span class="booktext">${book.text}</span>
+                    <span class="bookdate">${book.date}</span>
+                    <span class="bookamount">${book.amount}kr</span>
+                </div>`
+            });
+            //Det som er lagret i varriabelen "booklines" blir skrevet ut i HTML
+            document.getElementById("booklines").innerHTML = booklines;
+        }
+        //Kjører funksjonen 
+        skriverUtBooks()
+
+
 
         //TODOS
         const todos = [
@@ -107,7 +134,7 @@
         //.map() funksjonen går gjennom alle objektene i todos    
         todos.map((item, index) => {
         //For hvert objekt lagret i todos, legger den til et nytt <li> element "${item.text}" i "todolist" slik at det danner seg en liste 
-        //Inni <li> elementet er det en if/else/ternery operator som skjekker om ${item.status} er satt til "Done" hvis den er "task-status-done", og hvis ikke, er den satt til "To do" ved at det står "task-status-todo"
+        //Inni template literals er det en if/else som skjekker om ${item.status} er satt til "Done" hvis den er "task-status-done", og hvis ikke, er den satt til "To do" ved at det står "task-status-todo"
             oppgaver += `<li>
                 <span class="task-text">${item.text}</span>
                 <span class="task-status ${item.status === "Done" ? "task-status-done": "task-status-todo"}">${item.status}</span>
@@ -126,7 +153,7 @@
             //Laget en variabel som henter verdien som blir skrevet inn i inputfeltet "task"
             const skriveFelt = document.getElementById("task").value
             //Legger til oppgaven som blir skryevet inn i inputfeltet "task" inn i todos arrayen
-            todos.push({text: skriveFelt, status: "To do"})
+            todos.push({text: skriveFelt, status: "To do"});
             //Skriver ut oppgaven som blir lagt til i todos arrayen i HTML dokumentet
             oppgaver += `<li>
                 <span class="task-text">${skriveFelt}</span>
@@ -134,6 +161,10 @@
             </li>`
             document.getElementById("todolist").innerHTML = oppgaver
         }
+
+        //Arbeidskrav C, oppgave 3:
+        //Lager en funksjon som varsler brukeren, dersom det er ingenting i inputfeltet
+         
         
         
         //Arbeidskrav D, oppgave 2:
